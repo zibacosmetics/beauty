@@ -1,4 +1,0 @@
-[
-  { "id": 1, "name": "Lipstick", "price": 250, "image": "/img/lipstick.jpg", "desc": "Matte lipstick" },
-  { "id": 2, "name": "Facewash", "price": 180, "image": "/img/facewash.jpg", "desc": "Daily facewash" }
-]
