@@ -3655,7 +3655,7 @@
                 Reviews
               </div>
             </div>
-            
+
             <div id="description" class="tab-content active">
               <p>
                 The Rose Quartz Facial Serum is a luxurious treatment that
@@ -5404,7 +5404,7 @@
     /* ---------------- CART FUNCTIONS ---------------- */
     function addToCart(e, productId) {
       e.stopPropagation();
-      const product = fetchedProducts.find((p) => p.id == productId);
+      const product = fetchedProducts.find((p) => p.id === productId);
       if (!product) return console.error("Product not found:", productId);
 
       const existingItem = cartItems.find((item) => item.id == productId);
