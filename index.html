@@ -1376,57 +1376,37 @@
         // Fetch Products from Backend
         async function fetchProducts() {
             try {
-                const response = await fetch('http://localhost:5000/products');
-                fetchedProducts = await response.json();
-                renderProducts(fetchedProducts);
+                const response = await fetch("http://localhost:5000/products"); // Backend se products laa raha
+                const products = await response.json();
+
+                const container = document.getElementById("products-container");
+                container.innerHTML = ""; // purane products clear
+
+                products.forEach(p => {
+                    const card = document.createElement("div");
+                    card.classList.add("product");
+
+                    card.innerHTML = `
+        <img src="${p.image}" alt="${p.name}">
+        <h3>${p.name}</h3>
+        <p>${p.desc}</p>
+        <p>₹${p.price}</p>
+        <button onclick="addToCart(${p.id})">Add to Cart</button>
+      `;
+                    container.appendChild(card);
+                });
             } catch (err) {
-                console.error('Error fetching products:', err);
-                // Fallback to sample products if API fails
-                fetchedProducts = [
-                    {
-                        id: 1,
-                        name: "Rose Quartz Facial Serum",
-                        price: 34.99,
-                        image: "https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-                        category: "Skincare",
-                        desc: "Hydrating serum with rose quartz extract"
-                    },
-                    {
-                        id: 2,
-                        name: "Matte Lipstick Set",
-                        price: 29.99,
-                        image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-                        category: "Makeup",
-                        desc: "Set of 5 long-lasting matte lipsticks"
-                    },
-                    {
-                        "id": 3,
-                        "name": "Hyaluronic Acid Moisturizer",
-                        "price": 28.99,
-                        "image": "/img/moisturizer.jpg",
-                        "desc": "Deep hydration with hyaluronic acid",
-                        "category": "Skincare"
-                    },
-                    {
-                        "id": 4,
-                        "name": "Vitamin C Face Wash",
-                        "price": 18.99,
-                        "image": "/img/facewash.jpg",
-                        "desc": "Brightening face wash with Vitamin C",
-                        "category": "Skincare"
-                    },
-                    {
-                        "id": 5,
-                        "name": "Eyeshadow Palette",
-                        "price": 42.99,
-                        "image": "https://images.app.goo.gl/6tYMdBJiBjD6JaP38",
-                        "desc": "12 highly pigmented shades",
-                        "category": "Makeup"
-                    },
-                ];
-                renderProducts(fetchedProducts);
+                console.error("Error fetching products:", err);
             }
         }
+
+        // Page load hote hi products load kare
+        document.addEventListener("DOMContentLoaded", fetchProducts);
+
+                    
+                ];
+        renderProducts(fetchedProducts);
+
 
         // Render Products
         function renderProducts(products) {
