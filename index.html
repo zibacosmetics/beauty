@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pink Cosmetic Shop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">Pink<span>Cosmetics</span></h1>
+            <div class="header-icons">
+                <i class="fas fa-search"></i>
+                <div class="cart-icon-container">
+                    <i class="fas fa-shopping-cart cart-icon"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Discover Your Beauty</h2>
+            <p>Premium cosmetics with natural ingredients</p>
+            <button class="btn">Shop Now</button>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products container">
+        <h2 class="section-title">Our Products</h2>
+        <div class="products-grid" id="products-container">
+            <!-- Products will be loaded dynamically -->
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart">&times;</button>
+        </div>
+        <ul class="cart-items" id="cart-items">
+            <!-- Cart items will be loaded dynamically -->
+        </ul>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <button class="btn checkout-btn">Checkout</button>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cart-overlay"></div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
