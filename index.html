@@ -1374,70 +1374,57 @@
         });
 
         // Fetch Products from Backend
+        // Backend se products fetch karke render karna
         async function fetchProducts() {
             try {
-                const response = await fetch("http://localhost:5000/products"); // Backend se products laa raha
+                const response = await fetch("http://localhost:5000/products"); // backend API
                 const products = await response.json();
 
-                const container = document.getElementById("products-container");
-                container.innerHTML = ""; // purane products clear
-
-                products.forEach(p => {
-                    const card = document.createElement("div");
-                    card.classList.add("product");
-
-                    card.innerHTML = `
-        <img src="${p.image}" alt="${p.name}">
-        <h3>${p.name}</h3>
-        <p>${p.desc}</p>
-        <p>₹${p.price}</p>
-        <button onclick="addToCart(${p.id})">Add to Cart</button>
-      `;
-                    container.appendChild(card);
-                });
+                renderProducts(products); // yahan render call hoga
             } catch (err) {
                 console.error("Error fetching products:", err);
             }
         }
 
-        // Page load hote hi products load kare
-        document.addEventListener("DOMContentLoaded", fetchProducts);
-        
-        // Render Products
+        // Products ko UI me render karna
         function renderProducts(products) {
-            productsContainer.innerHTML = '';
+            const productsContainer = document.getElementById("products-container");
+            productsContainer.innerHTML = ''; // purane products clear
 
             products.forEach(product => {
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
                 productCard.innerHTML = `
-                    <div class="product-badge">Bestseller</div>
-                    <img src="${product.image}" alt="${product.name}" class="product-img">
-                    <div class="product-content">
-                        <span class="product-category">${product.category || 'Cosmetics'}</span>
-                        <h3 class="product-title">${product.name}</h3>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>(124)</span>
-                        </div>
-                        <div class="product-price">
-                            <span class="current-price">$${product.price.toFixed(2)}</span>
-                            <span class="old-price">$${(product.price * 1.2).toFixed(2)}</span>
-                        </div>
-                        <div class="product-actions">
-                            <button class="add-to-cart" onclick="addToCart(event, '${product.id}')">
-                                <i class="fas fa-shopping-cart"></i> Add to Cart
-                            </button>
-                        </div>
-                    </div>
-                `;
+            <div class="product-badge">Bestseller</div>
+            <img src="${product.image}" alt="${product.name}" class="product-img">
+            <div class="product-content">
+                <span class="product-category">${product.category || 'Cosmetics'}</span>
+                <h3 class="product-title">${product.name}</h3>
+                <div class="product-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span>(124)</span>
+                </div>
+                <div class="product-price">
+                    <span class="current-price">₹${product.price}</span>
+                    <span class="old-price">₹${(product.price * 1.2).toFixed(2)}</span>
+                </div>
+                <div class="product-actions">
+                    <button class="add-to-cart" onclick="addToCart(event, '${product.id}')">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                </div>
+            </div>
+        `;
                 productsContainer.appendChild(productCard);
             });
         }
+
+        // Page load hone ke baad products fetch karo
+        document.addEventListener("DOMContentLoaded", fetchProducts);
 
         // Cart Functions
         function addToCart(e, productId) {
